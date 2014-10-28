@@ -1,0 +1,92 @@
+{% extends 'HorusBackendBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <div class="page" id="commercials">
+        <h2><i class="glyphicon glyphicon-star"></i> Vos actions commerciales({{ commercials.getTotalItemCount }})</h2>
+        {% include 'HorusBackendBundle:Slots:display.html.twig' %}
+
+        {% if commercials is not empty %}
+            <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Nature</th>
+                <th>Produit</th>
+                <th>Catégorie</th>
+                <th>Visible</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for commercial in commercials %}
+                <tr>
+                    <td>{{ commercial.title|truncate('50') }}</td>
+                    <td>
+                        <i>
+                            {% if commercial.nature == 1 %}
+                                Remise Nette
+                            {% elseif commercial.nature == 2 %}
+                                Remise Variable
+                            {% else %}
+                                Produit offert
+                            {% endif %}
+                        </i>
+                    </td>
+                    {% if commercial.produit.title is defined %}
+                        <td>{{ commercial.produit.title }}</td>
+                    {% else %}
+                        <td><span class="label label-warning">Aucun produit</span></td>
+                    {% endif %}
+                    {% if commercial.category.name is defined %}
+                        <td>{{ commercial.category.name }}</td>
+                    {% else %}
+                        <td><span class="label label-warning">Aucune category</span></td>
+                    {% endif %}
+                    {% if commercial.isVisible %}
+                        <td><i class="glyphicon glyphicon-ok"></i></td>
+                    {% else %}
+                        <td><i class="glyphicon glyphicon-remove"></i></td>
+                    {% endif  %}
+                    <td>
+                        {% if commercial.isVisible %}
+                           <a class="btn btn-primary" onclick="return(confirm('Etes-vous sûr de vouloir désactiver cette action ?'));"
+                                   href="{{ path('horus_site_desactive_commercial', {'id' : commercial.id}) }}"><i
+                                            class="glyphicon glyphicon-minus-sign"></i></a>
+                        {% else %}
+                           <a class="btn btn-primary" onclick="return(confirm('Etes-vous sûr de vouloir activer cette action ?'));"
+                                   href="{{ path('horus_site_active_commercial', {'id' : commercial.id}) }}"><i
+                                            class="glyphicon glyphicon-ok"></i></a>
+                        {% endif %}
+
+                        <a onclick="return(confirm('Etes-vous sûr de vouloir supprimer cette action commerciale ?'));" href="{{ path('horus_site_remove_commercial', {'id' : commercial.id}) }}" class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i></a>
+                        <a href="{{ path('horus_site_edit_commercial', {'id' : commercial.id}) }}" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% else %}
+            <div class="alert alert-dismissable alert-danger">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <i class="glyphicon glyphicon-info-sign"></i> Aucune action de créer pour le moment.
+                <a href="{{ path('horus_site_commercial_create') }}" class="pull-right  btn btn-primary"><i
+                            class="glyphicon glyphicon-plus"></i> Ajouter une action commerciale</a>
+                <div class="clear"></div>
+            </div>
+        {% endif %}
+
+        <div class="pull-right">
+            {{ knp_pagination_render(commercials) }}
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="action">
+            <a href="{{ path('horus_site_commercial_create') }}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Ajouter une action commerciale</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+{% endblock %}
+

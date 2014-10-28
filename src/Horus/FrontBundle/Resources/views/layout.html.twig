@@ -1,0 +1,102 @@
+{% extends '::base.html.twig' %}
+
+
+{#
+    StylSheets
+#}
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+    {% stylesheets
+        '@HorusFrontBundle/Resources/public/css/style.css'
+        '@HorusFrontBundle/Resources/public/css/skin-1.css'
+        '@HorusFrontBundle/Resources/public/css/animate.min.css'
+        '@HorusFrontBundle/Resources/public/css/owl.carousel.css'
+        '@HorusFrontBundle/Resources/public/css/owl.theme.css'
+        '@HorusFrontBundle/Resources/public/css/ion.checkRadio.css'
+        '@HorusFrontBundle/Resources/public/css/ion.checkRadio.cloudy.css'
+        '@HorusFrontBundle/Resources/public/css/jquery.mCustomScrollbar.css'
+        '@HorusFrontBundle/Resources/public/css/jquery.mCustomScrollbar.css'
+    %}
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- include pace script for automatic web page progress bar  -->
+
+
+    {% javascripts '@HorusFrontBundle/Resources/public/js/pace.min.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">function swapStyleSheet(sheet){document.getElementById('pagestyle').setAttribute('href', sheet);}</script>
+
+    <script>paceOptions = {elements: true};</script>
+
+    <!-- Get jQuery from Google CDN -->
+    <!--[if !IE]> -->
+    <script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">'+"<"+"/script>"); </script>
+    <!-- <![endif]-->
+    <!--[if lte IE 9]>
+    <script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">'+"<"+"/script>"); </script>
+    <![endif]-->
+{% endblock %}
+
+
+
+
+
+{% block body %}
+
+    {{ include('HorusFrontBundle:Partials:signup.html.twig') }}
+    {{ include('HorusFrontBundle:Partials:signin.html.twig') }}
+    {{ include('HorusFrontBundle:Partials:navbar.html.twig') }}
+    {{ include('HorusFrontBundle:Partials:cart.html.twig') }}
+    {{ include('HorusFrontBundle:Partials:menu.html.twig') }}
+
+    {% block slider %}{% endblock %}
+    {% block content %}{% endblock %}
+
+
+    {{ include('HorusFrontBundle:Partials:add.html.twig') }}
+    {{ include('HorusFrontBundle:Partials:collections.html.twig') }}
+    {{ include('HorusFrontBundle:Partials:brands.html.twig') }}
+    {{ include('HorusFrontBundle:Partials:footer.html.twig') }}
+
+{% endblock %}
+
+
+
+
+{#
+    Javascripts
+#}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    {% javascripts
+    '@HorusFrontBundle/Resources/public/js/jquery.cycle2.min.js'
+    '@HorusFrontBundle/Resources/public/js/jquery.easing.1.3.js'
+    '@HorusFrontBundle/Resources/public/js/jquery.parallax-1.1.js'
+    '@HorusFrontBundle/Resources/public/js/jquery.mousewheel.min.js'
+    '@HorusFrontBundle/Resources/public/js/jquery.mCustomScrollbar.js'
+    '@HorusFrontBundle/Resources/public/js/ion.checkRadio.min.js'
+    '@HorusFrontBundle/Resources/public/js/grids.js'
+    '@HorusFrontBundle/Resources/public/js/owl.carousel.min.js'
+    '@HorusFrontBundle/Resources/public/js/jquery.minimalect.min.js'
+    '@HorusFrontBundle/Resources/public/js/bootstrap.touchspin.js'
+    '@HorusFrontBundle/Resources/public/js/home.js'
+    '@HorusFrontBundle/Resources/public/js/script.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}

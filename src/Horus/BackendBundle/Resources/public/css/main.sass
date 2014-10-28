@@ -1,0 +1,934 @@
+@import "compass"
+
+
+/*
+ * Global Variable
+ */
+
+$helvetica: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif
+$blue: #2980b9
+
+
+/*
+ * --------------------------------------------------------------------------------------------------------------------------------
+ */
+
+
+/*
+ * Clear Page
+ */
+@mixin clearfix()
+  &:before,&:after
+    content: ""
+    display: table
+  &:after
+    clear: both
+
+
+/*
+ * Full Page
+ */
+@mixin fullpage()
+  width: 100%
+  height: 100%
+
+/*
+ * Get Compatible property
+ */
+@mixin vendorize($property, $value)
+  -webkit-#{$property}: $value
+  -moz-#{$property}: $value
+  -ms-#{$property}: $value
+  -o-#{$property}: $value
+  #{$property}: $value
+
+
+/*
+ * Get Clear method
+ */
+@mixin clear()
+  &:before, &:after
+    content: "\0020"
+    display: block
+    height: 0
+    overflow: hidden
+  &:after
+    clear: both
+
+/*
+ * Get Test Out of Page
+ */
+@mixin linkTextOffscreen()
+  text-indent: -9999px
+  overflow: hidden
+  text-decoration: none
+  display: block
+  font-size: 0
+  text-align: start
+
+/*
+ * Get Common Property
+ */
+@mixin hoverActiveFocus($property, $value)
+  &:hover, &:active, &:focus
+    #{$property}: $value
+
+
+/*
+ * Get Font Size Responsive
+ */
+@mixin font-size($sizeValue: 1.6)
+  font-size: ($sizeValue * 10) + px
+  font-size: $sizeValue + rem
+
+
+/*
+ * --------------------------------------------------------------------------------------------------------------------------------
+ */
+
+
+@font-face
+  font-family: 'Glyphicons Halflings'
+  src: url('/css/fonts/glyphicons-halflings-regular.eot?')
+  src: url('/css/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),  url('/css/fonts/glyphicons-halflings-regular.woff') format('woff'), url('/css/font/glyphicons-halflings-regular.ttf') format('truetype'), url('/css/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg')
+
+
+
+/*
+ * General dom Elements
+ */
+html, body
+  min-height: 100%
+body
+  background: url('https://www.myposeo.com/img/frontend/main_background.jpg')
+  margin: 0
+  padding: 0
+  position: relative
+  button
+    -webkit-transition: all 0.2s ease-in-out
+    -moz-transition: all 0.2s ease-in-out
+    -o-transition: all 0.2s ease-in-out
+    transition: all 0.2s ease-in-out
+  a
+    -webkit-transition: all 0.2s ease-in-out
+    -moz-transition: all 0.2s ease-in-out
+    -o-transition: all 0.2s ease-in-out
+    transition: all 0.2s ease-in-out
+    color: chocolate
+  a.list-group-item
+    color: #222
+  label
+    font-size: 18px
+    color: brown
+    font-family: 'Lobster',cursive
+    margin-top: 0px
+    margin-right: 10px
+  .navbar-default
+    @include box-shadow(1px 1px 12px #555)
+  #status
+    label
+      margin-top: 0px
+
+  .nav-tabs>li.active>a
+    text-shadow: 1px 1px #631400,1px 1px #631400
+
+  .form-control
+    font-size: 16px
+    border-radius: 0px
+
+.row-fluid, .row-fluid:focus
+  .span12,.span12:focus
+    width: 100%
+    margin: 0
+
+// <hr /> Fancy
+hr.fancy-line
+  border: 0
+  height: 1px
+  display: none
+
+hr.fancy-line:before
+  top: -0.5em
+  height: 1em
+
+hr.fancy-line:after
+  content: ''
+  height: 0.5em
+  top: 1px
+
+#advancedsearch
+  label
+    color: white !important
+
+.media-heading
+  a:hover, a:focus
+    color: brown
+
+.page
+  [class*="span"]
+    margin-top: 15px
+    margin-bottom: 15px
+
+.addcaracteristiques
+  float: left
+  margin: 10px
+
+.iradio_flat-green
+  margin-right: 7px
+hr.fancy-line:before, hr.fancy-line:after
+  content: ''
+  position: absolute
+  width: 100%
+
+hr.fancy-line, hr.fancy-line:before
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 75%)
+
+table>tbody>tr>td
+  border-top: none
+
+hr.fancy-line:after
+  background: #f4f4f4
+
+.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td
+  color: #555
+  border: 1px solid #ccc
+
+.page
+  h2
+    text-align: center
+    margin-bottom: 30px
+
+.maincontent
+  margin-bottom: 50px
+  .popover
+    min-width: 250px
+    min-height: 80px
+  select.form-control
+    font-size: 13px !important
+    padding-left: 5px
+    background: #ddd
+    color: #222
+    text-shadow: 1px 1px #fff,1px 1px #fff
+
+  .multiselect-container>li.active
+    color: white
+  .multiselect
+    background: #eee
+    border: 1px solid #ddd
+    font-size: 12px
+  button[type="submit"]
+    width: 100%
+    margin-top: 20px
+    margin-bottom: 20px
+    color: white
+    text-shadow: 1px 1px #160100,1px 1px #160100
+    border: 1px solid #4F0D1C
+    background: #8a1720
+    background: -moz-linear-gradient(top, #8a1720 0%, #601011 100%)
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8a1720), color-stop(100%,#601011))
+    background: -webkit-linear-gradient(top, #8a1720 0%,#601011 100%)
+    background: -o-linear-gradient(top, #8a1720 0%,#601011 100%)
+    background: -ms-linear-gradient(top, #8a1720 0%,#601011 100%)
+    background: linear-gradient(to bottom, #8a1720 0%,#601011 100%)
+    &:hover
+      border: 1px solid #ffffff
+
+.modal
+  width: 300px
+  height: 200px
+  line-height: 200px
+  position: fixed
+  top: 50%
+  left: 50%
+  margin-top: -100px
+  margin-left: -150px
+  background-color: #f1c40f
+  border-radius: 5px
+  text-align: center
+  z-index: 11
+
+
+.overlay
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  z-index: 10
+  background-color: rgba(255, 255, 255, 0.5)
+  img
+    z-index: 9000
+    position: absolute
+    margin-top: 300px
+    margin-left: 700px
+    position: fixed
+
+
+input:invalid,
+textarea:invalid,
+select:invalid
+  color: #b94a48
+  border-color: #ee5f5b
+  &:focus
+    border-color: darken(#ee5f5b, 10%)
+    @include box-shadow(0 0 6px lighten(#ee5f5b, 20%))
+
+.container-fluid
+  min-height: 700px
+  height: auto !important
+  height: 100%
+  margin: 0 auto 0px
+
+.nav-pills>li>a
+  color: white
+  text-shadow: 1px 1px #49080c, 1px 1px #49080c
+.nav>li>a:hover, .nav>li>a:focus
+  text-decoration: none
+  background-color: #49080c
+  color: white
+
+.media-body
+  min-height: 155px
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus
+  color: white !important
+  text-shadow: 1px 1px #00aaba, 1px 1px #00aaba
+
+.navbar-nav>li>.dropdown-menu
+  border: none
+  border-radius: 0px
+
+#closepanel, #closesearch
+  position: relative
+  top: 15px
+  right: 12px
+
+table
+  margin-top: 10px
+  margin-bottom: 10px
+  thead
+    background-color: beige
+    border: 1px solid burlywood
+
+
+.table-bordered,.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td
+  border: 1px dashed brown
+
+.multiselect-container>li>a>label.radio, .multiselect-container>li>a>label.checkbox
+  color: burlywood
+
+h3#btn-tchat
+  font-size: 18px
+  position: fixed
+  top: 150px
+  right: -6px
+
+#messagerie
+  z-index: 9000
+  .datin
+    font-size: 11px
+  button[type="submit"]
+    margin-top: 5px
+    margin-top: 3px
+    width: 100%
+  textarea
+    font-size: 13px !important
+    height: 110px
+  font-size: 13px
+  padding: 5px
+  #sended
+    width: 100%
+    margin-top: 10px
+  #messages
+    height: 201px
+    overflow: auto
+    .content
+      text-align: justify
+    .title
+      font-weight: bold
+      color: darkcyan
+      margin-right: 9px
+  p
+    color: #222
+    font-size: 13px
+  color: #222
+  background-color: white
+  width: 660px
+  height: 495px
+  position: fixed
+  top: 250px
+  right: 500px
+  border: 20px solid rgba(200, 200, 200, 0.6)
+  @include background-clip(padding-box)
+
+#advancedsearch
+  .row-fluid
+    .span2
+      label
+        font-size: 16px
+  button[type="submit"]
+    width: 100%
+    border: 1px solid brown
+    color: #fff
+    background-color: #8a1720
+    &:hover
+      border: 1px solid #8a1720
+
+.popover
+  z-index: 5
+
+.pagination>li>a, .pagination>li>span,.pagination>li>a, .pagination>li>span, .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus, .pagination>.disabled>span, .pagination>.disabled>span:hover, .pagination>.disabled>span:focus, .pagination>.disabled>a, .pagination>.disabled>a:hover, .pagination>.disabled>a:focus
+  background-color: brown
+  border-color: brown
+  color: white
+  text-shadow: 1px 1px #6b0007, 1px 1px #6b0007
+
+.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
+  background-color: chocolate
+
+.dz-default
+  box-shadow: 1px 1px 13px #ccc
+  padding: 50px
+  font-size: 25px
+  border: 6px dashed #ddd
+
+.dz-default:hover, .dz-default:focus
+  background: #eee
+
+.dz-success-mark, .dz-error-mark, .dz-filename, .dz-size, .dz-progress
+  display: none
+
+.modal-content
+  background-color: white
+
+.zoom
+  cursor: pointer
+
+.table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th
+  background-color: antiquewhite
+  color: brown
+
+.table>thead>tr>th
+  color: #222
+
+#lastactions
+  small
+    color: #3f0004 !important
+  ul
+    li
+      padding-bottom: 5px
+      border-bottom: 1px solid #66090f
+  p
+    font-size: 11px
+    color: white !important
+  .pull-right
+    font-size: 10px
+
+li
+  list-style: none
+  list-style-type: none
+
+.whitetext
+  color: white
+.span3
+  .panel-body
+    .nav-tabs>li>a
+      color: white
+    .table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th
+      background-color: brown
+      border: none
+      color: bisque
+
+    .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td
+      border: none
+      font-size: 11px
+
+#footer
+  background-color: #111
+  height: 150px
+  border: 1px solid black
+
+.alert-danger
+  padding: 9px
+  font-size: 89%
+  border: none
+  border-radius: 0px
+  margin: 0px
+  margin-top: 10px
+  margin-bottom: 10px
+
+.clear
+  clear: both
+.clearing
+  background-color: beige
+  width: 100%
+  text-align: right
+  padding-right: 50px
+  margin-top: 10px
+  margin-bottom: 10px
+
+.panel
+  background-color: darkred
+
+.form-signin
+  max-width: 330px
+  padding: 15px
+  margin: 0 auto
+
+.img-thumbnail
+  background-color: transparent
+
+.well
+  background-color: cornsilk
+  border: 1px solid bisque
+
+
+.maincontent
+  img
+    max-width: 100%
+    -webkit-transition: all 0.5s ease-in-out
+    -moz-transition: all 0.5s ease-in-out
+    -o-transition: all 0.5s ease-in-out
+    transition: all 0.5s ease-in-out
+    &:hover
+      @include opacity(0.6)
+
+  .tab-content>.tab-pane
+    border: 1px dotted brown
+    padding: 15px
+    background-color: white
+    border-radius: 4px
+
+.panel-primary
+  border: none
+
+.open>.dropdown-menu
+  li
+    a:hover, a:focus
+      label
+        color: white !important
+
+.nav-tabs
+  border: none
+
+.cache
+  display: none
+
+img.img-thumbnail
+  max-width: 230px
+
+.multiselect-container>li>a>label
+  font-size: 12px
+
+h1, h2
+  color: darkslategrey
+  font-size: 28px
+  margin-bottom: 40px
+
+.media
+  img
+    max-width: 200px
+
+.nav-tabs>li>a:hover
+  border-color: transparent transparent brown
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
+  background-color: brown
+
+#searchmenu
+  background-color: darkred
+  border: none
+  box-shadow: none
+
+.scrollup
+  width: 40px
+  height: 40px
+  opacity: 0.3
+  position: fixed
+  bottom: 50px
+  right: 100px
+  display: none
+  text-indent: -9999px
+  background: url('http://www.pawelkaim.com/img/arrowTop.png')
+
+.container-fluid
+  padding-top: 70px
+
+.panel-body
+  box-shadow: inset 0 0 10px #6b0007
+
+.back
+  font-size: 11px
+  background-color: darkslategrey
+  border: 1px solid #222
+
+@media (max-width: 1200px)
+  .navbar-default .navbar-nav>li>a
+    font-size: 12px
+  .navbar-right
+    display: none !important
+  #leftmenu
+    display: none
+    .panel-body
+      font-size: 12px
+    .panel-heading
+      h4
+        font-size: 16px
+
+@media (min-width: 500px) and (max-width: 900px)
+  .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td
+    font-size: 80%
+  .nav>li>a
+    font-size: 12px
+  #messagerie
+    font-size: 12px
+    right: 100px
+    top: 10px
+    #messages
+      height: 201px
+      overflow: auto
+    p
+      color: #222
+      font-size: 12px
+
+
+@media (min-width: 1200px)
+  .container
+    width: 1300px
+
+
+@media (max-width: 600px)
+  #messagerie
+    font-size: 12px
+    right: 80px
+    top: 10px
+    #messages
+      height: 201px
+      overflow: auto
+    p
+      color: #222
+      font-size: 12px
+
+  #btn-tchat
+    display: none
+  #advancedsearch
+    .row-fluid
+      .span2
+        width: 90px
+        float: left
+        margin-left: 25px
+  .label
+    font-size: 90%
+  .badge
+    font-size: 15px
+    margin: 5px
+  .page
+    h2
+      font-size: 27px
+  .btn
+    font-size: 11px
+  .media-body
+    clear: both
+  .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td
+    font-size: 80%
+  #searchmenu
+    margin-bottom: 10px
+  .span3
+    .panel
+      display: none
+  .scrollup
+    display: none
+    text-indent: -9999px
+    opacity: 0
+    cursor: none
+    background: none
+  .back
+    display: none
+  label
+    font-size: 16px
+  .nav>li
+    margin-left: 5px
+  .nav-tabs>li>a
+    margin: 0
+  .navbar-fixed-top, .navbar-fixed-bottom
+    position: fixed
+  .navbar-default
+    .navbar-brand
+      position: relative
+      left: 50px
+  .navbar-default
+    margin: 0
+  .form-control
+    font-size: 14px
+  h1,h2
+    font-size: 22px
+  h3,h4
+    font-size: 14px
+  .btn
+    font-size: 12px
+  .media-body
+    font-size: 11px
+  .form-control
+    height: 35px
+  p
+    font-size: 11px
+  .nav-pills>li>a
+    font-size: 12px
+  .media-heading
+    font-size: 15px
+  .media
+    .pull-right
+      clear: both
+
+
+
+#mini-notification
+  display: none
+  position: fixed
+  cursor: pointer
+  width: 100%
+  background: #fff
+  font-size: 14px
+  text-align: center
+  border-top: 2px solid #fff
+  z-index: 9999
+  color: #3C3C3C
+  -moz-box-shadow: 0 0em 0.5em rgba(0, 0, 0, 0.3)
+  -webkit-box-shadow: 0 0em 0.5em rgba(0, 0, 0, 0.3)
+  box-shadow: 0 0em 0.5em rgba(0, 0, 0, 0.3)
+
+
+#mini-notification .inner
+  position: relative
+  width: 800px
+  margin:  0 auto
+  padding-right: 60px
+
+.contenthtml
+  background-color: white
+  padding: 5px
+  border: 1px solid #eeeeee
+  color: black !important
+  img
+    max-width: 180px !important
+  .right
+    float: right !important
+    padding: 5px
+    margin: 5px
+    clear: both
+  .left
+    float: left !important
+    padding: 5px
+    margin: 5px
+    clear: both
+  .italic
+    font-style: italic !important
+
+
+#mini-notification .close
+  position: absolute
+  color: #000
+  top: 10px
+  right: 0
+
+
+#mini-notification a.close:hover
+  text-decoration: underline
+
+#commandes
+  tr
+    td
+      color: darkred
+      a
+        color: #111
+
+.annule
+  background-color: #ff3200
+.attente
+  background-color: #fcdc6a
+.virrement
+  background-color: #FF0080
+.livraison
+  background-color: #6afcc9
+.erreur
+  background-color: #ff2626
+.livre
+  background-color: #9afc6a
+.paiement
+  background-color: #9b89ff
+.preparation
+  background-color: #ef89ff
+
+
+.action
+  background-color: currentcolor
+  color: #efefef
+  padding: 9px
+  border: 2px dotted white
+  margin: 10px
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br
+  border-radius: 0px !important
+  font-size: 12px !important
+
+#advancedsearch
+  #labels
+    margin-left: 25px
+  .span2
+    width: 10.2%
+    margin: 0 auto
+    text-align: center
+  label
+    font-size: 14px !important
+
+input.parsley-success, textarea.parsley-success
+  color: #468847 !important
+  background-color: #DFF0D8 !important
+  border: 1px solid #D6E9C6 !important
+
+input.parsley-error, textarea.parsley-error
+  color: #B94A48 !important
+  background-color: antiquewhite !important
+  border: 1px dashed crimson !important
+
+ul.parsley-error-list
+  font-size: 11px
+  margin: 2px
+  list-style-type: none
+  li
+    line-height: 11px
+
+#map-canvas
+  width: 920px
+  height: 350px
+  margin: 0px
+  padding: 5px
+  border: 10px dashed brown
+  border-radius: 5px
+
+/*
+ * --------------------------------------------------------------------------------------------------------------------------------
+ */
+
+//Presentation
+#presentation
+  color: brown
+
+.navbar-default .navbar-nav>li>a#notifications
+  border: none
+  border-radius: 0px
+
+.popover.bottom
+  width: 350px
+  .popover-content
+    p
+      font-size: 11px
+
+textarea
+  width: 534px
+  height: 250px
+
+.label-warning
+  background-color: chocolate
+
+.ishome
+  color: #aaa
+  cursor: pointer
+
+.highlight
+  background-color: yellow
+
+/*
+ * --------------------------------------------------------------------------------------------------------------------------------
+ */
+
+/*
+ * General blocks
+ */
+//
+//
+///* Main Container */
+.container
+  .maincontent
+    background-color: #fff
+    background-size: 100% 1.2em
+    color: darkgoldenrod
+    padding: 10px
+    border: 1px solid #ddd
+    box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1)
+
+//  position: relative
+//  @include fullpage()
+//  left: 0
+//  +transition(left 0.4s ease-in-out)
+//  .open-sidebar
+//    left: 240px
+//
+//  /* Sidebar Element */
+//  #sidebar
+//    position: absolute
+//    left: -240px
+//    background: $blue
+//    width: 240px
+//    height: 100%
+//    @include box-sizing(border-box)
+//    a
+//      padding: 15px 20px
+//      font-size: 16px
+//      font-weight: 100
+//      color: white
+//      text-decoration: none
+//      display: block
+//      border-bottom: 1px solid $blue
+//      +transition(background 0.3s ease-in-out)
+//      cursor: pointer
+//      &:hover
+//        background: #3498db
+//
+//  /* Main Content */
+//  .main-content
+//    @include fullpage()
+//    @include box-sizing(border-box)
+//    padding: 10px
+//    position: relative
+//
+//    /* Content */
+//    .content
+//      @include box-sizing(border-box)
+//      padding-left: 60px
+//      width: 100%
+//      h1
+//        font-weight: 100
+//
+//    /* Sidebar */
+//    #sidebar-toggle
+//      background: $blue
+//      @include border-radius(3px)
+//      display: block
+//      position: relative
+//      padding: 10px 7px
+//      float: left
+//      cursor: pointer
+//      span
+//        display: block
+//        width: 18px
+//        margin-bottom: 3px
+//        height: 2px
+//        background-color: #fff
+//        @include border-radius(1px)
+//        &:last-child
+//          margin-bottom: 0
+//
+
+
+/*
+ * --------------------------------------------------------------------------------------------------------------------------------
+ */
+
+/*
+ * General Classes
+ */
+ .clear
+  both
+
+

@@ -1,0 +1,67 @@
+jms_security_extra:
+    secure_all_services: true
+    expressions: true
+
+security:
+    access_denied_url:  /access-denied
+
+    encoders:
+       FOS\UserBundle\Model\UserInterface: sha512
+
+    providers:
+       fos_userbundle:
+          id: fos_user.user_provider.username_email
+
+    firewalls:
+      dev:
+        pattern:  ^/(_(profiler|wdt)|css|images|js)/
+        security: false
+
+      login:
+        pattern:  ^/login$
+        security: false
+        remember_me:
+          key: "%secret%"
+          lifetime: 31536000 # 365 days in seconds
+          path: /
+          domain: ~ # Defaults to the current domain from $_SERVER
+
+      backend:
+       pattern:    ^/administration
+       switch_user: { role: ROLE_ADMIN, parameter: compte_switch }
+       remember_me:
+         always_remember_me: true
+         key:      g46hqs4d9jqsdsd6g54h6sdyfhgadphfhgdldhjjhgjgm46sdfshg5qd1o
+         lifetime: 720000
+         path:     /
+         domain:   ~ #Defaults to the current domain from $_SERVER
+       form_login:
+         provider:               fos_userbundle
+         csrf_provider:          form.csrf_provider
+         login_path:  /login
+         check_path:  /administration/login_check
+         remember_me: true
+         always_use_default_target_path: false
+         default_target_path:  /administration
+       logout:
+         path:   /administration/logout
+         target: /login
+
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/administration, roles: [ROLE_ADMIN, ROLE_LOGISTIC,ROLE_CLIENT,ROLE_TRANSPORTEUR,ROLE_MARQUE,  ROLE_REDACTEUR, ROLE_TRADUCTEUR, ROLE_COMMERCIAL] }
+        - { path: ^/.*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    role_hierarchy:
+      ROLE_USER:       ROLE_USER
+      ROLE_ADMIN:       [ROLE_ADMIN,ROLE_TRANSPORTEUR,ROLE_MARQUE, ROLE_CLIENT ROLE_LOGISTIC, ROLE_REDACTEUR, ROLE_TRADUCTEUR, ROLE_COMMERCIAL, ROLE_ALLOWED_TO_SWITCH]
+      ROLE_LOGISTIC:       ROLE_LOGISTIC
+      ROLE_TRADUCTEUR:       ROLE_TRADUCTEUR
+      ROLE_REDACTEUR:       ROLE_REDACTEUR
+      ROLE_MARQUE:       ROLE_MARQUE
+      ROLE_CLIENT:       ROLE_CLIENT
+      ROLE_TRANSPORTEUR:       ROLE_TRANSPORTEUR
+      ROLE_COMMERCIAL:       ROLE_COMMERCIAL
+      ROLE_SUPER_ADMIN: [ROLE_ADMIN,ROLE_USER,ROLE_ALLOWED_TO_SWITCH]
+#        ROLE_PARTENAIRE: [ROLE_PARTENAIRE,ROLE_USER,ROLE_ALLOWED_TO_SWITCH]

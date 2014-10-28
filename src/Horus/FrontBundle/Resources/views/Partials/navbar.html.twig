@@ -1,0 +1,47 @@
+{% block navbar %}
+    <!-- Fixed navbar start -->
+    <div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
+        <div class="navbar-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">
+                        <div class="pull-left ">
+                            <ul class="userMenu ">
+                                <li> <a href="#"> <span class="hidden-xs">{{ "help"|trans }}</span><i class="glyphicon glyphicon-info-sign hide visible-xs "></i> </a> </li>
+                                <li class="phone-number"> <a  href="callto:0674585648"> <span> <i class="glyphicon glyphicon-phone-alt "></i></span> <span class="hidden-xs" style="margin-left:5px"> {{ "tel"|trans }} </span> </a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
+                        <div class="pull-right">
+                            <ul class="userMenu">
+                                <li> <a href="account-1.html"><span class="hidden-xs"> {{ "My Account"|trans }}</span> <i class="glyphicon glyphicon-user hide visible-xs "></i></a> </li>
+                                <li> <a href="#"  data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">{{ "Sign in"|trans }}</span> <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </a> </li>
+                                <li class="hidden-xs"> <a href="#"  data-toggle="modal" data-target="#ModalSignup"> {{ "Create an account"|trans }} </a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.navbar-top-->
+
+        <!-- container begin-->
+
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only"> {{ "Toggle navigation"|trans }} </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span> </button>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-cart"> <i class="fa fa-shopping-cart colorWhite"> </i> <span class="cartRespons colorWhite"> {{ "Cart"|trans }} ($210.00) </span> </button>
+            <a class="navbar-brand " href="index.html">
+                <img src="{{ asset('images/horus.png') }}" alt="TSHOP">
+            </a>
+
+            <!-- this part for mobile -->
+            <div class="search-box pull-right hidden-lg hidden-md hidden-sm">
+                <div class="input-group">
+                    <button class="btn btn-nobg getFullSearch" type="button"> <i class="fa fa-search"> </i> </button>
+                </div>
+                <!-- /input-group -->
+            </div>
+        </div>
+{% endblock %}

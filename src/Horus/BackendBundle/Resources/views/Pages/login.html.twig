@@ -1,0 +1,95 @@
+{% extends 'HorusBackendBundle::layout_simple.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@HorusBackendBundle/Resources/public/js/index.js' filter="cssrewrite" %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        var init = [];
+        init.push(function () {
+            $("#signin-form_id").validate({
+                ignore: '.ignore, .select2-input',
+                focusInvalid: false,
+                rules: {
+                    'username_id': {
+                        required: true
+                    },
+                }
+            });
+        });
+        window.PixelAdmin.start(init);
+    </script>
+
+{% endblock %}
+
+
+{% block content %}
+
+    {% block fos_user_content %}
+
+        <h1 class="form-header"><i class="glyphicon glyphicon-off"></i>  Authentification</h1>
+
+        <form  id="signin-form_id" class="panel" action="{{ path("backend_login_check") }}" method="post">
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+            {% if error is defined and error is not empty   %}
+                <div class="alert alert-dismissable alert-danger">
+                    <button class="close" data-dismiss="alert">×</button>
+                    <i class="glyphicon glyphicon-warning-sign"></i> {{ 'auth.badcredentials'|trans({}, 'HorusBackendBundle') }}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input name="_username" value="{{ last_username }}" id="username_id" type="text" class="form-control input-lg" placeholder=" {{ 'auth.email'|trans({}, 'HorusBackendBundle') }}"
+                           required="required">
+                </div>
+            </div>
+
+            <div class="form-group signin-password">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-flash"></i></span>
+                    <input name="_password" type="password"  id="password_id" class="form-control input-lg"  placeholder=" {{ 'auth.passord'|trans({}, 'HorusBackendBundle') }}" required="required">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="checkbox pull-left">
+                        <label>
+                            <input type="checkbox" name="_remember_me" class="px"> <span class="lbl">Remember me</span>
+                        </label>
+                    </div>
+                    <a class="col-md-offset-3" href=""><i class="glyphicon glyphicon-ok"></i> Inscription</a>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <input type="submit" value="Sign In" class="btn btn-primary btn-block btn-lg">
+            </div>
+        </form>
+
+
+
+        <div class="signin-with">
+            <div class="header">ou se loguer avec</div>
+            {#{% for owner in hwi_oauth_resource_owners() %}#}
+                {#{% if owner == "facebook" %}#}
+                    {#<a href="{{ hwi_oauth_login_url(owner) }}" class="btn btn-lg btn-facebook rounded"><i class="fa fa-facebook"></i></a>&nbsp;&nbsp;#}
+                {#{% elseif owner == "google" %}#}
+                    {#<a href="{{ hwi_oauth_login_url(owner) }}" class="btn btn-lg btn-danger rounded"><i class="fa fa-google-plus"></i></a>#}
+                {#{% elseif owner == "twitter" %}#}
+                    {#<a href="{{ hwi_oauth_login_url(owner) }}" class="btn btn-lg btn-info rounded"><i class="fa fa-twitter"></i></a>&nbsp;&nbsp;#}
+                {#{% endif %}#}
+            {#{% endfor %}#}
+        </div>
+
+
+    {% endblock fos_user_content %}
+
+{% endblock %}
+
+

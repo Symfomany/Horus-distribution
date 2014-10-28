@@ -1,0 +1,24 @@
+{% extends 'HorusBackendBundle::layout.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="page" id="clients">
+        <h2><i class="glyphicon glyphicon-user"></i> Clients ({{ clients.getTotalItemCount }} clients)</h2>
+        {% include 'HorusBackendBundle:Slots:display.html.twig' %}
+
+        <hr class="clear fancy-line">
+        {% include 'HorusBackendBundle:Clients:_listclients.html.twig' %}
+
+        <div class="pull-right">
+            {{ knp_pagination_render(clients) }}
+        </div>
+        <div class="clear"></div>
+
+        <a href="{{ path('horus_site_create_client') }}" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-plus"></i> Créer un client</a>
+    <div class="clear"></div>
+    </div>
+{% endblock %}
+

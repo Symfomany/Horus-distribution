@@ -1,0 +1,18 @@
+{% extends 'HorusBackendBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="page" id="familles">
+        <h2><i class="glyphicon glyphicon-th"></i> Vos familles({{ familles.getTotalItemCount }})</h2>
+        {% include 'HorusBackendBundle:Slots:display.html.twig' %}
+        {% include 'HorusBackendBundle:Category:_listfamilles.html.twig' %}
+
+        <div class="pull-right">
+            {{ knp_pagination_render(familles) }}
+        </div>
+        <div class="clear"></div>
+        <div class="action">
+            <a href="{{ path('horus_site_add_famille') }}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Ajouter une famille</a>
+        </div>
+    </div>
+{% endblock %}
+

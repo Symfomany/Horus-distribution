@@ -1,0 +1,14 @@
+<div class="">
+    <div class="panel-heading"><h4><i class="glyphicon glyphicon-transfer"></i> Qui est en ligne?</h4>
+    </div>
+    <div class="panel-body">
+        <ul class="nav nav-pills nav-stacked">
+            {% for admin in admins %}
+                <li>
+                    {% if admin.online %}<img src="{{ asset('images/online.png') }}" />{% else %}<img src="{{ asset('images/offline.png') }}" />{% endif %} {{ admin.firstname|title }} {{ admin.lastname|title }} <small class="text-danger">(Il y a {{ admin.lastLogin|created_ago|default('Pas encore connecté') }})</small>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="panel-heading"></div>
+</div>

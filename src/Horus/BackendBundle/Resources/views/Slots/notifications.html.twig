@@ -1,0 +1,35 @@
+{% block notifications %}
+    <a href="#messages" class="dropdown-toggle" data-toggle="dropdown">
+        <span class="label">{{ notifications|length }}</span>
+        <i class="nav-icon fa fa-comments"></i>
+        <span class="small-screen-text">{{ "Comments"|trans }}</span>
+    </a>
+
+
+    <!-- Javascript -->
+    <script>
+        init.push(function () {
+            $('#main-navbar-messages').slimScroll({ height: 250 });
+        });
+    </script>
+
+
+    <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
+        <div class="messages-list" id="main-navbar-messages">
+
+            {% for entity in notifications %}
+                <div class="message">
+                    <a href="#" class="message-subject">{{ entity.content }}</a>
+                    <div class="message-description">
+                        {{ "From"|trans }} <a href="#">{{ entity.user.username|truncate(50,"...") }}</a>
+                        &nbsp;&nbsp;·&nbsp;&nbsp;
+                        {{ entity.dateCreated|ago }}
+                    </div>
+                </div> <!-- / .message -->
+            {% endfor %}
+
+        </div> <!-- / .messages-list -->
+        <a href="{{ path('horus_site_commentaires') }}" class="messages-link">{{ "More comments"|trans }}</a>
+    </div> <!-- / .dropdown-menu -->
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'HorusBackendBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <div class="page" id="commentaires">
+        <h2><i class="glyphicon glyphicon-comment"></i> Vos commentaires</h2>
+        {% include 'HorusBackendBundle:Slots:display.html.twig' %}
+        {% include 'HorusBackendBundle:Commentaires:_listcommentaires.html.twig' %}
+
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,80 @@
+{
+    "name": "HorusCMF/Shop",
+    "license": "MIT",
+    "type": "project",
+    "version": "2.0",
+    "description": "Horus CMF Shop, open source e-commerce solution based on Symfony2",
+    "keywords": ["CMF", "Shop", "Symfony2"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Symfomany",
+            "email": "julien@meetserious.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/symfony": "2.6.x-dev",
+        "doctrine/orm": "~2.2,>=2.2.3",
+        "doctrine/doctrine-bundle": "~1.2",
+        "twig/extensions": "1.0.*",
+        "symfony/assetic-bundle": "2.3.*",
+        "symfony/swiftmailer-bundle": "2.3.*",
+        "symfony/monolog-bundle": "~2.4",
+        "sensio/distribution-bundle": "~3.0",
+        "sensio/framework-extra-bundle": "~3.0",
+        "incenteev/composer-parameter-handler": "~2.0",
+
+        "jms/serializer-bundle": "dev-master",
+        "jms/security-extra-bundle": "dev-master",
+
+        "knplabs/knp-paginator-bundle": "dev-master",
+        "codeception/codeception": "*",
+        "friendsofsymfony/elastica-bundle": "3.0.*@dev",
+        "stof/doctrine-extensions-bundle": "dev-master",
+        "fg/essence": "1.4.1",
+        "imagine/Imagine": "0.6.*@dev",
+        "whiteoctober/tcpdf-bundle": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
+    },
+    "require-dev": {
+        "sensio/generator-bundle": "~2.3"
+    },
+
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+	"symfony-assets-install": "relative",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        },
+        "branch-alias": {
+            "dev-master": "2.6-dev"
+        }
+    }
+}

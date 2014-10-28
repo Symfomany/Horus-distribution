@@ -1,0 +1,21 @@
+{% extends 'HorusBackendBundle::layout.html.twig' %}
+
+
+{% block content %}
+    <div class="page" id="categories">
+        <h2><i class="glyphicon glyphicon-th-large"></i> Vos catégories({{ categories.getTotalItemCount }})</h2>
+        {% include 'HorusBackendBundle:Slots:display.html.twig' %}
+
+        {% include 'HorusBackendBundle:Category:_listcategories.html.twig' %}
+
+        <div class="pull-right">
+            {{ knp_pagination_render(categories) }}
+        </div>
+        <div class="clear"></div>
+        <div class="action">
+            <a href="{{ path('horus_site_add_category') }}" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Ajouter une catégorie</a>
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}
+

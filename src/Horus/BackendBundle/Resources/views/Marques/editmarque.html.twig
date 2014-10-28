@@ -1,0 +1,136 @@
+{% extends 'HorusBackendBundle::layout.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@HorusBackendBundle/Resources/public/js/pages/marque.js' %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+
+{% block content %}
+    <div id="editarticle" class="page">
+        <a class="btn back btn-danger pull-right" href="{{ path('horus_site_marques') }}">&larr; Revenir à la liste des
+            marques</a>
+
+        <h1><i class="glyphicon glyphicon-pencil"></i> Editer "{{ marque.title }}"</h1>
+        <hr class="clear fancy-line">
+
+        <form id="editmarque" novalidate="novalidate" action="{{ path('horus_site_edit_marques', {'id' : marque.id}) }}"
+              method="post" enctype="multipart/form-data">
+
+            <div class="row-fluid">
+                <div class="span7">
+                    <label for="title">Nom de la marque</label>
+
+                    <div class="input-group">
+                        {{ form_widget(form.title) }}
+                        <span class="input-group-btn"><button class="btn btn-search btn-primary"><i
+                                        class="glyphicon glyphicon-pencil"></i></button></span>
+                    </div>
+                    {{ form_errors(form.title) }}
+                </div>
+                <div class="span5">
+                    <label for="keywords">Quelques mots-clefs
+                        <small>(séparé par des virgules)</small>
+                    </label>
+
+                    <div class="input-group">
+                        {{ form_widget(form.keywords) }}
+                        <span class="input-group-btn"><button class="btn btn-search btn-primary"><i
+                                        class="glyphicon glyphicon-pencil"></i></button></span>
+                    </div>
+                    {{ form_errors(form.keywords) }}
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <label for="resume">Petit résumé de la marque</label>
+                    {{ form_widget(form.resume) }}
+                    {{ form_errors(form.resume) }}
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <label for="description">Description complète de la marque</label>
+                    {{ form_widget(form.description) }}
+                    {{ form_errors(form.description) }}
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <label for="url"><i
+                                class="glyphicon glyphicon-list-alt"></i> Site Officiel de la marque</label>
+
+                    <div class="input-group">
+                        {{ form_widget(form.url) }}
+                        <span class="input-group-btn"><button class="btn btn-search btn-primary"><i
+                                        class="glyphicon glyphicon-globe"></i></button></span>
+                    </div>
+                    {{ form_errors(form.url) }}
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <label for="file"><i class="glyphicon glyphicon-picture"></i> Logo de la marque</label>
+                    {{ form_widget(form.file) }}
+                    {{ form_errors(form.file) }}
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <label for="parent">Marque parente</label>
+                    {{ form_widget(form.parent) }}
+                    {{ form_errors(form.parent) }}
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span12">
+                    {{ form_widget(form.active) }}
+                    {{ form_errors(form.active) }}
+                    <label for="active">Visible sur le site</label>
+                </div>
+            </div>
+            <p></p>
+            <hr class="clear"/>
+            <h3>Référencement de la page</h3>
+            <button type="button" class="btn btn-primary btn-md" data-toggle="collapse" data-target="#seo"><i
+                        class="glyphicon glyphicon-plus"></i> Configurer le SEO de la page
+            </button>
+            <div id="seo" class="collapse">
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <label for="metaTitle">Titre de référencement</label>
+                        {{ form_widget(form.metaTitle) }}
+                        {{ form_errors(form.metaTitle) }}
+                    </div>
+                </div>
+                <p></p>
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <label for="metaDescription">Description de référencement</label>
+                        {{ form_widget(form.metaDescription) }}
+                        {{ form_errors(form.metaDescription) }}
+                    </div>
+                </div>
+                <p></p>
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <label for="metaKeywords">Mots-clefs de référencement</label>
+                        {{ form_widget(form.metaKeywords) }}
+                        {{ form_errors(form.metaKeywords) }}
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-large" type="submit"><i class="glyphicon glyphicon-plus"></i> Editer une
+                marque
+            </button>
+        </form>
+    </div>
+{% endblock %}
+

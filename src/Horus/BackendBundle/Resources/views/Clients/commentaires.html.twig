@@ -1,0 +1,16 @@
+{% extends 'HorusBackendBundle::layout.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        // adds the package you need
+        google.load("visualization", "1", {packages:["corechart", 'table', 'gauge']});
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="page" id="commentaires">
+        <h2><i class="glyphicon glyphicon-comment"></i> Commentaires</h2>
+    </div>
+{% endblock %}
+

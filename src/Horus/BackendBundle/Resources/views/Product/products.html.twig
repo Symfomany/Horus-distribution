@@ -1,0 +1,37 @@
+{% extends 'HorusBackendBundle::layout.html.twig' %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/horussite/js/jRating.jquery.min.js') }}"></script>
+    {% javascripts '@HorusBackendBundle/Resources/public/js/pages/produits.js' %}
+        <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/horussite/css/jRating.jquery.css') }}"/>
+{% endblock %}
+
+    {% block titlepage %}<i class="glyphicon glyphicon-gift"></i> Vos produits({{ produits.getTotalItemCount }}) {% endblock %}
+
+{% block content %}
+    <div class="page" id="products">
+        {% include 'HorusBackendBundle:Slots:display.html.twig' %}
+
+        <hr class="clear fancy-line">
+
+        {% include 'HorusBackendBundle:Product:_listproducts.html.twig' %}
+
+        <div class="action well row">
+            <a href="{{ path('horus_site_create_product') }}" class="btn btn-primary pull-left"><i class="glyphicon glyphicon-plus"></i> Ajouter une produit</a>
+            <div class="pull-right">
+                {{ knp_pagination_render(produits) }}
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+{% endblock %}
+

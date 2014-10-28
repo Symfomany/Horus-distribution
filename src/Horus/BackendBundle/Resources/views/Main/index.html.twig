@@ -1,0 +1,20 @@
+{% extends 'HorusBackendBundle::layout.html.twig' %}
+
+
+{% block content %}
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+
+    <div class="page" id="main">
+
+        {{ render(controller('HorusBackendBundle:Chart:global')) }}
+        {#{{ render(controller('HorusBackendBundle:Chart:months')) }}#}
+        {#{{ render(controller('HorusBackendBundle:Chart:days')) }}#}
+        {{ render_hinclude(controller('HorusBackendBundle:Commandes:lastcommandes')) }}
+        {{ render_hinclude(controller('HorusBackendBundle:Clients:lastclients')) }}
+        {{ render_hinclude(controller('HorusBackendBundle:Commentaires:lastcommentaires')) }}
+
+    </div>
+{% endblock %}
+

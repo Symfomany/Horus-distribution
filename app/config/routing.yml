@@ -1,0 +1,41 @@
+horus_frontend:
+    resource: "@HorusFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
+horus_backend:
+    resource: "@HorusBackendBundle/Resources/config/routing.yml"
+    prefix:   /administration/{_locale}
+    requirements:
+      _locale: en|es|de|fr
+
+
+###
+### Main
+###
+horus_site_main:
+  pattern:  /administration/{_locale}
+  defaults: { _controller: HorusBackendBundle:Main:index, _locale: fr }
+
+###
+### Login
+###
+backend_login_check:
+  pattern:   /administration/login_check
+
+backend_logout:
+  pattern:  /administration/logout
+
+
+# app/config/routing.yml
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+# Access denied
+horus_site_denied:
+  pattern:  /access-denied/
+  defaults: { _controller: HorusBackendBundle:Administrateur:denied }
+
+# Login page
+backend_login:
+  pattern:  /login
+  defaults: { _controller: HorusBackendBundle:Security:login }

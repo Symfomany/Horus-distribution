@@ -1,0 +1,13 @@
+{% extends 'HorusBackendBundle::layout.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="page" id="factures">
+    <h2><i class="glyphicon glyphicon-euro"></i> Factures</h2>
+        {% include 'HorusBackendBundle:Slots:display.html.twig' %}
+</div>
+{% endblock %}
+

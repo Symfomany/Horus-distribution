@@ -1,0 +1,397 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: '@HorusBackendBundle/Resources/config/config.yml' }
+
+framework:
+    esi:             ~
+    translator:      { fallback: "%locale%" }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        hinclude_default_template: HorusBackendBundle::hinclude.html.twig
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_proxies: ~
+    session:         ~
+    fragments: { path: /_fragment }
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form:
+      resources:
+          - 'HorusBackendBundle:Slots:forms.html.twig'
+
+
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:        ["HorusBackendBundle", "HorusFrontBundle"]
+    #java: /usr/bin/java
+    filters:
+         cssrewrite: ~
+         yui_css:
+            jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+         closure:
+            jar: "%kernel.root_dir%/Resources/java/googleclosure.jar"
+
+# Doctrine Extensions
+stof_doctrine_extensions:
+    orm:
+      default:
+          sluggable: true
+          timestampable: true
+          tree: true
+
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver, add the path in parameters.yml
+        # e.g. database_path: %kernel.root_dir%/data/data.db3
+        # path:     %database_path%
+
+    orm:
+      auto_generate_proxy_classes: %kernel.debug%
+      default_entity_manager:   default
+      entity_managers:
+        default:
+          dql:
+           datetime_functions:
+               datediff: Horus\BackendBundle\AST\Functions\DateDiff
+               dateformat: Horus\BackendBundle\AST\Functions\DateFormat
+               day: Horus\BackendBundle\AST\Functions\Day
+           numeric_functions:
+               geo:  Horus\BackendBundle\AST\Functions\Geo
+               age:  Horus\BackendBundle\AST\Functions\Age
+               round:  Horus\BackendBundle\AST\Functions\Round
+          connection:       default
+          mappings:
+            HorusBackendBundle: ~
+            HorusFrontBundle: ~
+            gedmo_tree:
+              type: annotation
+              prefix: Gedmo\Tree\Entity
+              dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+              alias: GedmoTree # this one is optional and will default to the name set for the mapping
+              is_bundle: false
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }
+
+#Symfony2 Extensions
+sensio_framework_extra:
+    router:  { annotations: true }
+    request: { converters: true }
+    view:    { annotations: false }
+    cache:   { annotations: true }
+
+#Global Services
+services:
+    twig.extension.text:
+       class: Twig_Extensions_Extension_Text
+       tags:
+           - { name: twig.extension }
+    twig.extension.debug:
+       class: Twig_Extensions_Extension_Debug
+       tags:
+           - { name: twig.extension }
+    twig.extension.intl:
+       class: Twig_Extensions_Extension_Intl
+       tags:
+           - { name: twig.extension }
+    project.twig.extension:
+       class:  Horus\BackendBundle\Extension\Twig\HorusExtension
+       tags:
+           -  { name: twig.extension }
+
+
+# Extra security
+jms_security_extra:
+    secure_all_services: true
+    enable_iddqd_attribute: false
+    expressions: true
+
+
+#KNP Paginator
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: HorusBackendBundle:Slots:pagination.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Default:pagination.html.twig # sort link template
+
+# FOS User
+fos_user:
+    db_driver: orm
+    firewall_name: backend
+    user_class: Horus\BackendBundle\Entity\Administrateur
+
+
+#FOS Elastica
+fos_elastica:
+    default_manager: orm
+    clients:
+        default: { host: localhost, port: 9200 }
+    indexes:
+        website:
+            client: default
+            index_name: website_qa
+            types:
+              article:
+                mappings:
+                    title: { type: string }
+                    content: { type: string }
+                    datePublication: { type: date }
+                    tags:
+                      type: "nested"
+                      properties:
+                         word: {type: string }
+                    pages:
+                      type: "nested"
+                      properties:
+                         name: {type: string }
+                         cover: {type: string }
+                         description: { type: string }
+                persistence:
+                    driver: orm
+                    model: Horus\BackendBundle\Entity\Article
+                    repository: Horus\BackendBundle\Entity\ArticleRepository
+                    provider:
+                        query_builder_method: createIsActiveQueryBuilder
+                    finder: ~
+                    listener: ~ # by default, listens to "insert", "update" and "delete"
+              marques:
+                mappings:
+                    title: { type: string }
+                    keywords: { type: string }
+                    resume: { type: string }
+                    description: { type: string }
+                    marques:
+                      type: "nested"
+                      properties:
+                       reference: {type: string }
+                       title: {type: string }
+                       service: {type: string }
+                       cover: {type: string }
+                       content: { type: string }
+                persistence:
+                    driver: orm
+                    model: Horus\BackendBundle\Entity\Marques
+                    repository: Horus\BackendBundle\Entity\MarquesRepository
+                    provider:
+                        query_builder_method: getActivePageQueryBuilder
+                    finder: ~
+                    listener: ~ # by default, listens to "insert", "update" and "delete"
+              clients:
+                mappings:
+                    firstname: { type: string }
+                    lastname: { type: string }
+                    description: { type: string }
+                    entreprise: { type: string }
+                    zipcode: { type: string }
+                    ville: { type: string }
+                    tel: { type: string }
+                    email: { type: string }
+                persistence:
+                    driver: orm
+                    model: Horus\BackendBundle\Entity\Client
+                    repository: Horus\BackendBundle\Entity\ClientRepository
+                    provider:
+                        query_builder_method: getActivePageQueryBuilder
+                    finder: ~
+                    listener: ~ # by default, listens to "insert", "update" and "delete"
+              fournisseurs:
+                mappings:
+                  title: { type: string }
+                  resume: { type: string }
+                  description: { type: string }
+                  fournisseurs:
+                    type: "nested"
+                    properties:
+                     reference: {type: string }
+                     title: {type: string }
+                     service: {type: string }
+                     cover: {type: string }
+                     content: { type: string }
+                persistence:
+                    driver: orm
+                    model: Horus\BackendBundle\Entity\Fournisseurs
+                    repository: Horus\BackendBundle\Entity\FournisseursRepository
+                    provider:
+                        query_builder_method: getActivePageQueryBuilder
+                    finder: ~
+                    listener: ~ # by default, listens to "insert", "update" and "delete"
+              category:
+                mappings:
+                    name: {type: string }
+                    cover: { type: string }
+                    description: { type: string }
+                    produits:
+                      type: "nested"
+                      properties:
+                         reference: {type: string }
+                         title: {type: string }
+                         service: {type: string }
+                         cover: {type: string }
+                         content: { type: string }
+                persistence:
+                    driver: orm
+                    model: Horus\BackendBundle\Entity\Category
+                    repository: Horus\BackendBundle\Entity\CategoryRepository
+                    provider:
+                        query_builder_method: getActiveCategoryQueryBuilder
+                    finder: ~
+                    listener: ~ # by default, listens to "insert", "update" and "delete"
+              commercial:
+                mappings:
+                    title: {type: string }
+                    content: { type: string }
+                persistence:
+                    driver: orm
+                    model: Horus\BackendBundle\Entity\Commercial
+                    repository: Horus\BackendBundle\Entity\CommercialRepository
+                    provider:
+                        query_builder_method: getActiveCommercialQueryBuilder
+                    finder: ~
+                    listener: ~ # by default, listens to "insert", "update" and "delete"
+              famille:
+                mappings:
+                    name: {type: string }
+                    cover: { type: string }
+                    description: { type: string }
+                    keywords: { type: string }
+                    produits:
+                      type: "nested"
+                      properties:
+                         reference: {type: string }
+                         title: {type: string }
+                         service: {type: string }
+                         cover: {type: string }
+                         content: { type: string }
+                persistence:
+                    driver: orm
+                    model: Horus\BackendBundle\Entity\Famille
+                    repository: Horus\BackendBundle\Entity\FamilleRepository
+                    provider:
+                        query_builder_method: getActiveFamilleQueryBuilder
+                    finder: ~
+                    listener: ~ # by default, listens to "insert", "update" and "delete"
+              images:
+                mappings:
+                    title: {type: string }
+                    cover: { type: string }
+                persistence:
+                    driver: orm
+                    model: Horus\BackendBundle\Entity\Image
+                    repository: Horus\BackendBundle\Entity\ImageRepository
+                    provider:
+                        query_builder_method: getActiveImageQueryBuilder
+                    finder: ~
+                    listener: ~ # by default, listens to "insert", "update" and "delete"
+              pages:
+                mappings:
+                    name: {type: string }
+                    cover: {type: string }
+                    description: { type: string }
+                    produits:
+                      type: "nested"
+                      properties:
+                         reference: {type: string }
+                         title: {type: string }
+                         service: {type: string }
+                         cover: {type: string }
+                         content: { type: string }
+                persistence:
+                    driver: orm
+                    model: Horus\BackendBundle\Entity\Page
+                    repository: Horus\BackendBundle\Entity\PageRepository
+                    provider:
+                        query_builder_method: getActivePageQueryBuilder
+                    finder: ~
+                    listener: ~ # by default, listens to "insert", "update" and "delete"
+              produit:
+                mappings:
+                    reference: {type: string }
+                    title: {type: string }
+                    service: {type: string }
+                    cover: {type: string }
+                    content: { type: string }
+                    articles:
+                      type: "nested"
+                      properties:
+                         title: { type: string }
+                         content: { type: string }
+                         datePublication: { type: date }
+                    category:
+                      type: "nested"
+                      properties:
+                          name: { type: string }
+                          cover: ~
+                          description: ~
+                    cates:
+                      type: "nested"
+                      properties:
+                          name: { type: string }
+                          cover: ~
+                          description: ~
+                    tags:
+                      type: "nested"
+                      properties:
+                          word: { type: string }
+                    familles:
+                      type: "nested"
+                      properties:
+                          name: { type: string }
+                          cover: ~
+                          description: ~
+                    prixHT: { type: float }
+                    prixTTC: { type: float }
+                    prixTTC: { type: float }
+                persistence:
+                    driver: orm
+                    model: Horus\BackendBundle\Entity\Produit
+                    repository: Horus\BackendBundle\Entity\ProduitRepository
+                    provider:
+                        query_builder_method: getActiveProduitQueryBuilder
+                    finder: ~
+                    listener: ~ # by default, listens to "insert", "update" and "delete"
+              tag:
+                mappings:
+                    word: {type: string }
+                persistence:
+                    driver: orm
+                    model: Horus\BackendBundle\Entity\Tag
+                    repository: Horus\BackendBundle\Entity\CategoryRepository
+                    provider:
+                        query_builder_method: getTags
+                    finder: ~
+                    listener: ~ # by default, listens to "insert", "update" and "delete"
+

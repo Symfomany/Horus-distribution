@@ -1,0 +1,29 @@
+{% extends 'HorusBackendBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="page" id="messages">
+        <h2><i class="glyphicon glyphicon-comment"></i> Tous les messages de la Messagerie Interne</h2>
+        {% include 'HorusBackendBundle:Slots:display.html.twig' %}
+
+        <div id="all-messages">
+            <ul>
+                {% for message in messages|reverse %}
+                    <li>
+                        <span class="title">{{ message.title }}</span>
+                        <span class="content">{{ message.description }} <span class="datin pull-right"><i
+                                        class="glyphicon glyphicon-time"></i> {{ message.dateCreated|date('d/m/Y H:i') }}</span> </span>
+                    </li>
+                {% else %}
+                    <div class="alert alert-dismissable alert-danger">
+                        <i class="glyphicon glyphicon-info-sign"></i> Aucun message pour le moment.
+                        <div class="clear"></div>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
+            <div class="pull-right">
+                {{ knp_pagination_render(messages) }}
+            </div>
+            <div class="clear"></div>
+    </div>
+{% endblock content %}

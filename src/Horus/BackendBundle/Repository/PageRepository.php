@@ -1,0 +1,81 @@
+<?php
+namespace Horus\BackendBundle\Repository;
+
+use Doctrine\ORM\EntityRepository;
+
+/**
+ * Class PageRepository
+ * @package Horus\BackendBundle\Repository
+ */
+class PageRepository extends EntityRepository
+{
+
+    /**
+     * Get Active Page
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getActivePageQueryBuilder()
+    {
+        $queryBuilder = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('m')
+            ->from('Horus\BackendBundle\Entity\Page', 'm')
+            ->orderBy('m.id', 'DESC');
+        return $queryBuilder;
+    }
+
+    /**
+     * Get Active Page
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getCountValidPages($state = 3)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery("SELECT COUNT(a.id) FROM HorusBackendBundle:Page a WHERE a.nature = :state")
+            ->setParameter('state', $state);
+        return $query->getSingleScalarResult();
+    }
+
+
+    /**
+     * Is Article
+     * @return mixed
+     */
+    public function isArticle()
+    {
+        $query = $this->getEntityManager()
+            ->createQuery("SELECT COUNT(a) nombre FROM HorusBackendBundle:Article a");
+        return $query->getOneOrNullResult();
+    }
+
+    /**
+     * Is Article
+     * @return mixed
+     */
+    public function getNbArticle()
+    {
+        $query = $this->getEntityManager()
+            ->createQuery("SELECT COUNT(a.id) FROM HorusBackendBundle:Page a WHERE a.articles IS EMPTY");
+        return $query->getSingleScalarResult();
+    }
+
+
+    public function getPagesIsDesactive()
+    {
+        $query = $this->getEntityManager()
+            ->createQuery("SELECT COUNT(a.id) FROM HorusBackendBundle:Page a WHERE a.nature = :visible")
+            ->setParameter('visible', 1);
+        return $query->getSingleScalarResult();
+    }
+
+
+    public function getPagesWait()
+    {
+        $query = $this->getEntityManager()
+            ->createQuery("SELECT COUNT(a.id) FROM HorusBackendBundle:Page a WHERE a.nature = :visible")
+            ->setParameter('visible', 2);
+        return $query->getSingleScalarResult();
+    }
+
+
+}

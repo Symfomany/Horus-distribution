@@ -1,0 +1,49 @@
+{% block topmenu %}
+    <ul class="nav navbar-nav">
+        <li class="dropdown {% if  app.request.attributes.get('_route') == "horus_site_commercial_create"  or app.request.attributes.get('_route') == "horus_site_edit_marques" or  app.request.attributes.get('_route') == "horus_site_marques" or app.request.attributes.get('_route') == "horus_site_commercials" or app.request.attributes.get('_route') == 'horus_site_products' or app.request.attributes.get('_route') == 'horus_site_create_product' %}active{% endif %}">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="glyphicon glyphicon-gift"></i>  {{ "Products"|trans }} <span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="themes">
+                <li  {% if  app.request.attributes.get('_route') == "horus_site_products" %} class="active" {% endif %}><a  href="{{ path('horus_site_products') }}"><i class="glyphicon glyphicon-list"></i> {{ "My products"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_create_product" %} class="active" {% endif %}><a  href="{{ path('horus_site_create_product') }}"><i class="glyphicon glyphicon-plus-sign"></i> {{ "Create a product"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_marques" %} class="active" {% endif %}><a  href="{{ path('horus_site_marques') }}"><i class="glyphicon glyphicon-bookmark"></i> {{ "My brands"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_commercials" %} class="active" {% endif %}><a  href="{{ path('horus_site_commercials') }}"><i class="glyphicon glyphicon-star"></i> {{ "Commercial actions"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_commercial_create" %} class="active" {% endif %}><a  href="{{ path('horus_site_commercial_create') }}"><i class="glyphicon glyphicon-star-empty"></i> {{ "Create a promotion"|trans }}</a></li>
+            </ul>
+        </li>
+        <li class="dropdown {% if app.request.attributes.get('_route') == 'horus_site_add_famille' or  app.request.attributes.get('_route') == 'horus_site_familles' or app.request.attributes.get('_route') == 'horus_site_categories' or app.request.attributes.get('_route') == 'horus_site_add_category' %}active{% endif %}">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><i class="glyphicon glyphicon-folder-open"></i>  {{ "Categories"|trans }}<span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="download">
+                <li {% if  app.request.attributes.get('_route') == "horus_site_categories" %} class="active" {% endif %}><a  href="{{ path('horus_site_categories') }}"><i class="glyphicon glyphicon-folder-close"></i> {{ "My categories"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_add_category" %} class="active" {% endif %}><a  href="{{ path('horus_site_add_category') }}"><i class="glyphicon glyphicon-folder-open"></i> {{ "Create a categories"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_familles" %} class="active" {% endif %}><a  href="{{ path('horus_site_familles') }}"><i class="glyphicon glyphicon-briefcase"></i> {{ "My families"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_add_famille" %} class="active" {% endif %}><a  href="{{ path('horus_site_add_famille') }}"><i class="glyphicon glyphicon-bookmark"></i> {{ "Create a family"|trans }}</a></li>
+            </ul>
+        </li>
+        <li class="dropdown {% if  app.request.attributes.get('_route') == 'horus_site_tag_create' or  app.request.attributes.get('_route') == 'horus_site_tags' or app.request.attributes.get('_route') == 'horus_site_pages' or  app.request.attributes.get('_route') == 'horus_site_page_create' or app.request.attributes.get('_route') == 'horus_site_articles' or app.request.attributes.get('_route') == 'horus_site_article_create' %}active{% endif %}">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="glyphicon glyphicon-list-alt"></i>  {{ "Content"|trans }} <span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="themes">
+                <li {% if  app.request.attributes.get('_route') == "horus_site_pages" %} class="active" {% endif %}><a  href="{{ path('horus_site_pages') }}"><i class="glyphicon glyphicon-book"></i> {{ "My pages"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_page_create" %} class="active" {% endif %}><a  href="{{ path('horus_site_page_create') }}"><i class="glyphicon glyphicon-file"></i> {{ "Create a page"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_articles" %} class="active" {% endif %}><a  href="{{ path('horus_site_articles') }}"><i class="glyphicon glyphicon-tags"></i> {{ "My articles"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_article_create" %} class="active" {% endif %}><a  href="{{ path('horus_site_article_create') }}"><i class="glyphicon glyphicon-pencil"></i> {{ "Create an article"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_tags" %} class="active" {% endif %}><a  href="{{ path('horus_site_tags') }}"><i class="glyphicon glyphicon-tags"></i> {{ "My tags"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_tag_create" %} class="active" {% endif %}><a  href="{{ path('horus_site_tag_create') }}"><i class="glyphicon glyphicon-tag"></i> {{ "Create a tag"|trans }}</a></li>
+            </ul>
+        </li>
+        <li {% if  app.request.attributes.get('_route') == "horus_site_commandes" %} class="active" {% endif %}><a  href="{{ path('horus_site_commandes') }}"><i class="glyphicon glyphicon-th-list"></i> {{ "Orders"|trans }}</a></li>
+        <li {% if  app.request.attributes.get('_route') == "horus_site_clients" %} class="active" {% endif %}><a  href="{{ path('horus_site_clients') }}"><i class="glyphicon glyphicon-user"></i> {{ "Customers"|trans }}</a></li>
+        <li class="dropdown {% if app.request.attributes.get('_route') == 'horus_site_fournisseurs' or app.request.attributes.get('_route') == 'horus_site_factures' or  app.request.attributes.get('_route') == 'horus_site_transports' or  app.request.attributes.get('_route') == 'horus_site_transports' or  app.request.attributes.get('_route') == 'horus_site_paniers'  or  app.request.attributes.get('_route') == 'horus_site_commentaires'   or  app.request.attributes.get('_route') == 'horus_site_charts' %}active{% endif %}">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><i class="glyphicon glyphicon-plus"></i>  {{ "More"|trans }}<span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="download">
+                <li {% if  app.request.attributes.get('_route') == "horus_site_fournisseurs" %} class="active" {% endif %}><a  href="{{ path('horus_site_fournisseurs') }}"><i class="glyphicon glyphicon-tower"></i> {{ "Supplier"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_factures" %} class="active" {% endif %}><a  href="{{ path('horus_site_factures') }}"><i class="glyphicon glyphicon-usd"></i> {{ "Billing"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_transports" %} class="active" {% endif %}><a  href="{{ path('horus_site_transports') }}"><i class="glyphicon glyphicon-road"></i> {{ "Manufacturers"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_paniers" %} class="active" {% endif %}><a  href="{{ path('horus_site_paniers') }}"><i class="glyphicon glyphicon-shopping-cart"></i> {{ "Cards"|trans }}</a></li>
+                <li {% if  app.request.attributes.get('_route') == "horus_site_commentaires" %} class="active" {% endif %}><a  href="{{ path('horus_site_commentaires') }}"><i class="glyphicon glyphicon-comment"></i> {{ "Comments"|trans }}</a></li>
+                {#<li {% if  app.request.attributes.get('_route') == "horus_site_charts" %} class="active" {% endif %}><a  href="{{ path('horus_site_charts') }}"><i class="glyphicon glyphicon-stats"></i> Gérer les statistiques</a></li>#}
+            </ul>
+        </li>
+    </ul>
+
+
+{% endblock %}

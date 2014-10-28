@@ -1,0 +1,38 @@
+{% block commandes %}
+
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title"><i class="glyphicon glyphicon-th-list"></i> {{ "Last orders"|trans }}</span>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>{{ "Reference"|trans }}</th>
+                    <th>{{ "Customers"|trans }}</th>
+                    <th>{{ "Price TTC"|trans }}</th>
+                    <th>{{ "Carriers"|trans }}</th>
+                    <th>{{ "State"|trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for commande in commandes %}
+                    <tr class="{{ commande.etat|commandesclasses }}">
+                        <td><a href="{{ path('horus_site_commande', {'id' : commande.id}) }}">{{ loop.index }}</a></td>
+                        <td>
+                            <a href="{{ path('horus_site_commande', {'id' : commande.id}) }}">{{ commande.reference }}</a>
+                        </td>
+                        <td><a href="">{{ commande.client.firstname|title }} {{ commande.client.lastname|title }}</a></td>
+                        <td>{{ commande.totalTTC }}€</td>
+                        <td>{{ commande.transport.title }}</td>
+                        <td>{{ commande.etat|commandes }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+

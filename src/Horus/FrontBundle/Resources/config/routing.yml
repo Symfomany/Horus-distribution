@@ -1,0 +1,4 @@
+#Page Index
+horus_front_index:
+    path:     /
+    defaults: { _controller: HorusFrontBundle:Main:index }

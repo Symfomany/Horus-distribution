@@ -1,0 +1,9 @@
+{% block search %}
+     <form action="{{ path('horus_search_avanced') }}" id="form_search" method="post"  role="search" class="pull-right col-xs-12 col-sm-8">
+            <div class="input-group no-margin">
+                <span class="input-group-addon" style="border:none;background: #fff;background: rgba(0,0,0,.05);"><i class="fa fa-search"></i></span>
+                {{ form_widget(form.search,{"id" : "search_input",'attr': {"class": "search_input form-control no-padding-hr" ,"id" : "search_input", "value" :  word, "data-url" : path('horus_site_products_ajax', {'ajax': "true"}) }}) }}
+               {{ form_rest(form) }}
+            </div>
+        </form>
+{% endblock %}

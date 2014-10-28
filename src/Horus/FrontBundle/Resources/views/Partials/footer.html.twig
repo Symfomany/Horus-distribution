@@ -1,0 +1,86 @@
+
+{% block footer %}
+    <footer>
+        <div class="footer" id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3  col-md-3 col-sm-4 col-xs-6">
+                        <h3> {{ "Support"|trans }} </h3>
+                        <ul>
+                            <li class="supportLi">
+                                <p> Lorem ipsum dolor sit amet, consectetur </p>
+                                <h4> <a class="inline" href="callto:+8801680531352"> <strong> <i class="fa fa-phone"> </i> 88 01680 531352 </strong> </a> </h4>
+                                <h4> <a class="inline" href="mailto:help@tshopweb.com"> <i class="fa fa-envelope-o"> </i> help@tshopweb.com </a> </h4>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                        <h3> {{ "Shop"|trans }} </h3>
+                        <ul>
+                            <li> <a href=""> {{ "Home"|trans }} </a> </li>
+                            <li> <a href=""> {{ "Category"|trans }} </a> </li>
+                            <li> <a href=""> {{ "Sub Category"|trans }} </a> </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                        <h3> {{ "Information"|trans }} </h3>
+                        <ul>
+                            <li> <a href=""> {{ "Product Details"|trans }} </a> </li>
+                            <li> <a href=""> {{ "Product Details Version 2"|trans }} </a> </li>
+                            <li> <a href=""> {{ "Cart"|trans }} </a> </li>
+                            <li> <a href=""> {{ "About us"|trans }} </a> </li>
+                            <li> <a href=""> {{ "About us 2"|trans }} </a> </li>
+                            <li> <a href=""> {{ "Contact us"|trans }} </a> </li>
+                            <li> <a href=""> {{ "Contact us 2"|trans }} </a> </li>
+                            <li> <a href=""> {{ "Terms &amp; Conditions"|trans }} </a> </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                        <h3> {{ "My account"|trans }} </h3>
+                        <ul>
+                            <li> <a href=""> {{ "Account login"|trans }} </a> </li>
+                            <li> <a href=""> {{ "My account"|trans }} </a> </li>
+                            <li> <a href=""> {{ "My address"|trans }} </a> </li>
+                            <li> <a href=""> {{ "Wisth list"|trans }} </a> </li>
+                            <li> <a href=""> {{ "Order list"|trans }} </a> </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
+                        <h3> {{ "Stay in touch"|trans }} </h3>
+                        <ul>
+                            <li>
+                                <div class="input-append newsLatterBox text-center">
+                                    <input type="text" class="full text-center" placeholder="Email ">
+                                    <button class="btn  bg-gray" type="button"> {{ "Suscribe"|trans }} <i class="fa fa-long-arrow-right"> </i> </button>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="social">
+                            <li> <a href="http://facebook.com/"> <i class=" fa fa-facebook"> &nbsp; </i> </a> </li>
+                            <li> <a href="http://twitter.com/"> <i class="fa fa-twitter"> &nbsp; </i> </a> </li>
+                            <li> <a href="https://plus.google.com/"> <i class="fa fa-google-plus"> &nbsp; </i> </a> </li>
+                            <li> <a href="http://youtube.com/"> <i class="fa fa-pinterest"> &nbsp; </i> </a> </li>
+                            <li> <a href="http://youtube.com/"> <i class="fa fa-youtube"> &nbsp; </i> </a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--/.row-->
+            </div>
+            <!--/.container-->
+        </div>
+        <!--/.footer-->
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="pull-left"> {{ "© Horus CMF 2014. All right reserved."|trans }} </p>
+                <div class="pull-right paymentMethodImg">
+                    <img height="30" class="pull-right" src="{{ asset('images/site/payment/master_card.png') }}" alt="img">
+                    <img height="30" class="pull-right" src="{{ asset('images/site/payment/paypal.png') }}" alt="img">
+                    <img height="30" class="pull-right" src="{{ asset('images/site/payment/american_express_card.png') }}" alt="img">
+                    <img height="30" class="pull-right" src="{{ asset('images/site/payment/google_wallet.png') }}" alt="img">
+                    <img height="30" class="pull-right" src="{{ asset('images/site/payment/discover_network_card.png') }}" alt="img"> </div>
+            </div>
+        </div>
+        <!--/.footer-bottom-->
+    </footer>
+{% endblock %}

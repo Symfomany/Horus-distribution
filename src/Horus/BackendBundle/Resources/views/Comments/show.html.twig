@@ -1,0 +1,30 @@
+{% extends 'CinheticPublicBundle::layout.html.twig' %}
+
+
+{% block content %}
+    <h1>Commentaires</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Note</th>
+                <td>{{ entity.note }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ entity.content }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{{ entity.dateCreated|ago }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    {{ form(delete_form) }}
+{% endblock %}
